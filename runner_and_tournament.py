@@ -28,16 +28,15 @@ class Tournament:
     def start(self):
         finishers = {}
         place = 1
-        overun = 0
+        
         while self.participants:
             for participant in self.participants:
+                
                 participant.run()
                 if participant.distance >= self.full_distance:
-                    if overun < participant.distance - self.full_distance:
-                        finishers[place] = participant
-                        place += 1
-                        self.participants.remove(participant)
-                        overun = participant.distance - self.full_distance
+                    finishers[place] = participant
+                    place += 1
+                    self.participants.remove(participant)
+                   
                     
-
         return finishers
