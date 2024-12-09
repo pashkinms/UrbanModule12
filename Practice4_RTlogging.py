@@ -4,19 +4,26 @@ from rt_with_exceptions import Runner, Tournament
 
 class RunnerTest(unittest.TestCase):
     is_frosen = True
-        
-    def type_test(self):
+    
+    def test_some(self):
+        self.assertFalse(False)
+            
+    def test_name(self):
         try:
             name, speed = 2, 3
             human = Runner(name, speed)
             human.name
-        except TypeError as exp:
+        except TypeError as exp:            
             logging.error(f"Неверный тип имени {name}: {exp}")
+            self.assertFalse(True)
+    
+    def test_speed(self):
         try:
             name, speed = 'Ванечка', -10
             human = Runner(name, speed)
         except ValueError as exp:
             logging.error(f"Ошибка в значении скорости {speed}: {exp}")
+            self.assertFalse(True)
             
     @unittest.skipIf(is_frosen, "Tests are frozen in this case.")
     def test_walk(self):
