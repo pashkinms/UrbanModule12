@@ -12,17 +12,18 @@ class RunnerTest(unittest.TestCase):
         try:
             name, speed = 2, 3
             human = Runner(name, speed)
-            human.name
+            logging.info('Test is sucsessfully passed')
         except TypeError as exp:            
-            logging.error(f"Неверный тип имени {name}: {exp}")
+            logging.warning(f"Неверный тип имени {name}: {exp}")
             self.assertFalse(True)
     
     def test_speed(self):
         try:
             name, speed = 'Ванечка', -10
             human = Runner(name, speed)
+            logging.info('Test is sucsessfully passed')
         except ValueError as exp:
-            logging.error(f"Ошибка в значении скорости {speed}: {exp}")
+            logging.warning(f"Ошибка в значении скорости {speed}: {exp}")
             self.assertFalse(True)
             
     @unittest.skipIf(is_frosen, "Tests are frozen in this case.")
