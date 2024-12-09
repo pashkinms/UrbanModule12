@@ -2,20 +2,19 @@ import unittest
 import logging
 from rt_with_exceptions import Runner, Tournament
 
-
 class RunnerTest(unittest.TestCase):
-    is_frosen = False
-    
-    @unittest.skipIf(is_frosen, "Tests are frozen in this case.")
+    is_frosen = True
+        
     def type_test(self):
         try:
             name, speed = 2, 3
-            human = Runner(name , speed)
+            human = Runner(name, speed)
+            human.name
         except TypeError as exp:
             logging.error(f"Неверный тип имени {name}: {exp}")
         try:
             name, speed = 'Ванечка', -10
-            human = Runner(name , speed)
+            human = Runner(name, speed)
         except ValueError as exp:
             logging.error(f"Ошибка в значении скорости {speed}: {exp}")
             
@@ -43,7 +42,7 @@ class RunnerTest(unittest.TestCase):
         self.assertNotEqual(human1.distance, human2.distance)
         
 class TournamentTest(unittest.TestCase):
-    is_frosen = False
+    is_frosen = True
     
     @classmethod
     def setUpClass(cls) -> None:
@@ -88,9 +87,10 @@ class TournamentTest(unittest.TestCase):
         self.assertTrue(self.all_results[2] == self.runner2)
         self.assertTrue(self.all_results[1] == self.runner1)   
         
+logging.basicConfig(level=logging.INFO, filemode='w', filename='runner_tests.log', encoding='utf-8',
+                        format='%(asctime)s | %(levelname)s | %(message)s')  
         
 if __name__ == '__main__':
-    logging.basicConfig(level=logging.INFO, filemode='w', filename='runner_tests.log', encoding='utf-8',
-                        format='%(asctime)s | %(levelname)s | %(message)s')  
+    
     unittest.main(verbosity=2)
     
